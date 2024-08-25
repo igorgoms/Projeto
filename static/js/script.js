@@ -1,4 +1,6 @@
-const socket = io.connect("http://" + document.domain + ":" + location.port);
+// Verifique se você está usando HTTPS e ajuste a URL do Socket.IO
+const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+const socket = io.connect(`${protocol}://${document.domain}:${location.port}`);
 
 // Função para adicionar uma mensagem ao chat
 socket.on('response', function (data) {
