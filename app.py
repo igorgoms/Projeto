@@ -47,9 +47,14 @@ def configure():
 def chat():
     return render_template('chat.html')
 
+#@socketio.on('message')
+#def handle_message(message):
+#    emit('response', message, broadcast=True)
+
 @socketio.on('message')
-def handle_message(message):
-    emit('response', message, broadcast=True)
+def handle_message(data):
+    print(f"Received message data: {data}")  # Adicione isso para depuração
+    emit('response', data, broadcast=True)
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)
