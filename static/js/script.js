@@ -1,6 +1,7 @@
 // Verifique se você está usando HTTPS e ajuste a URL do Socket.IO
 const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-const socket = io.connect(`${protocol}://${document.domain}:${location.port}`);
+const socket = io.connect("https://projeto-three-green.vercel.app");
+
 
 // Função para adicionar uma mensagem ao chat
 socket.on('response', function (data) {
