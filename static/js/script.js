@@ -1,11 +1,9 @@
-// Verifique se você está usando HTTPS e ajuste a URL do Socket.IO
-const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-const socket = io.connect("https://projeto-three-green.vercel.app");
-
+// Conectar ao servidor Socket.IO usando HTTPS
+const socket = io("https://" + window.location.hostname + ":" + window.location.port);
 
 // Função para adicionar uma mensagem ao chat
 socket.on('response', function (data) {
-    console.log("Received message data:", data); // Adicione isso para depuração
+    console.log("Received message data:", data); // Debug para verificar os dados recebidos
 
     const messageElement = document.createElement('div');
     messageElement.className = 'message';
@@ -13,10 +11,11 @@ socket.on('response', function (data) {
     document.getElementById('messages').appendChild(messageElement);
 });
 
+// Função para enviar uma mensagem
 function sendMessage() {
     const message = document.getElementById('message').value;
-    const username = document.getElementById('username').value; // Certifique-se de que este valor está sendo obtido corretamente
-    const color = document.getElementById('color').value; // Certifique-se de que este valor está sendo obtido corretamente
+    const username = "{{ session['username'] }}"; // Usar o nome de usuário da sessão
+    const color = "{{ session['color'] }}"; // Usar a cor da sessão
     socket.send({ message: message, username: username, color: color });
     document.getElementById('message').value = '';
 }
