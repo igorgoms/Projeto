@@ -4,7 +4,7 @@ from flask_socketio import SocketIO, emit
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
 
-# Configure SocketIO with CORS allowed origins
+# Configure o SocketIO para permitir conexões de HTTPS
 socketio = SocketIO(app, cors_allowed_origins=["https://projeto-three-green.vercel.app"])
 
 # Definir a variável servers
