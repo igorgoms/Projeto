@@ -1,10 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for, session, send_from_directory
 from flask_socketio import SocketIO, emit
+from flask_cors import CORS
 import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
-socketio = SocketIO(app, cors_allowed_origins="*")  # Permitir todas as origens para Socket.IO
+socketio = SocketIO(app, cors_allowed_origins="*")
+
+# Configurar CORS
+CORS(app, resources={r"*": {"origins": "*"}})
 
 servers = {}
 
@@ -36,8 +40,8 @@ def configure():
         server_name = request.form.get('server_name')
         password = request.form.get('password')
         if servers.get(server_name) == password:
-            session['username'] = request.form.get('username')  # Armazenar o nome de usuário
-            session['color'] = request.form.get('color')        # Armazenar a cor do usuário
+            session['username'] = request.form.get('username')
+            session['color'] = request.form.get('color')
             return redirect(url_for('chat'))
         else:
             return "Invalid credentials", 403
@@ -51,11 +55,11 @@ def chat():
 def handle_message(message):
     emit('response', message, broadcast=True)
 
-# Rota para servir arquivos estáticos
 @app.route('/static/<path:path>')
 def send_static(path):
     return send_from_directory('static', path)
 
-#if __name__ == '__main__':
-    # Executar o servidor Flask localmente com suporte a WebSocket
-#    socketio.run(app, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
+if __name__ == '__main__':
+    # Remover ou comentar a linha abaixo
+    # socketio.run(app, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
+    pass
