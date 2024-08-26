@@ -3,10 +3,9 @@ from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
-socketio = SocketIO(app, cors_allowed_origins="*")  # Certifique-se de que cors_allowed_origins está correto
 
 # Configure SocketIO with CORS allowed origins
-socketio = SocketIO(app, cors_allowed_origins=["https://projeto-qmoetrk2h-igorgoms-projects.vercel.app"])
+socketio = SocketIO(app, cors_allowed_origins=["https://projeto-three-green.vercel.app"])
 
 # Definir a variável servers
 servers = {}
@@ -29,6 +28,7 @@ def login():
     if request.method == 'POST':
         admin_name = request.form.get('admin_name')
         admin_password = request.form.get('admin_password')
+        # Adicionar lógica de autenticação do administrador
         return redirect(url_for('index'))
     return render_template('login.html')
 
@@ -38,8 +38,8 @@ def configure():
         server_name = request.form.get('server_name')
         password = request.form.get('password')
         if servers.get(server_name) == password:
-            session['username'] = request.form.get('username')
-            session['color'] = request.form.get('color')
+            session['username'] = request.form.get('username')  # Armazenar o nome de usuário
+            session['color'] = request.form.get('color')        # Armazenar a cor do usuário
             return redirect(url_for('chat'))
         else:
             return "Invalid credentials", 403

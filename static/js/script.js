@@ -1,5 +1,6 @@
 // Conectar ao servidor Socket.IO usando HTTPS
-const socket = io.connect("wss://" + window.location.host);  // Use wss:// para conexões seguras
+const socket = io.connect("https://projeto-three-green.vercel.app");
+  // Use wss:// para conexões seguras
 
 
 // Função para adicionar uma mensagem ao chat
