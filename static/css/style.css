@@ -85,3 +85,23 @@ a:visited {
 a:active {
     color: #3700b3; /* Cor dos links quando clicados */
 }
+
+/* Estilo para o container de mensagens */
+#messages {
+    width: 100%;
+    max-width: 600px; /* Ajuste conforme necessário */
+    margin: 0 auto;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow-wrap: break-word; /* Quebra automática de palavras longas */
+    word-wrap: break-word; /* Para navegadores mais antigos */
+}
+
+/* Estilo para cada mensagem */
+.message {
+    padding: 10px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}

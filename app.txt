@@ -3,8 +3,8 @@ from flask_socketio import SocketIO, emit
 import os
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your_secret_key'
-socketio = SocketIO(app, cors_allowed_origins="*")  # Permitir todas as origens para Socket.IO
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'default_secret_key')
+socketio = SocketIO(app, cors_allowed_origins="https://projeto-pkjy.onrender.com/")  # Permitir todas as origens para Socket.IO
 
 servers = {}
 
@@ -52,5 +52,6 @@ def handle_message(message):
     emit('response', message, broadcast=True)
 
 if __name__ == '__main__':
-    # Executar o servidor Flask localmente com suporte a WebSocket
-    socketio.run(app, host='127.0.0.1', port=5000, debug=True)
+    # Remover o código abaixo se estiver usando o Gunicorn
+    # socketio.run(app, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+    pass

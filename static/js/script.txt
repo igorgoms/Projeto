@@ -1,5 +1,4 @@
-// As variáveis `username` e `color` devem ser definidas no script inline no HTML
-const socket = io('http://localhost:5000');
+const socket = io("https://projeto-pkjy.onrender.com/"); // URL para o servidor local
 
 socket.on('connect', () => {
     console.log('Connected to WebSocket server');
@@ -18,7 +17,7 @@ socket.on('response', function (message) {
 // Função para enviar uma mensagem
 function sendMessage() {
     const message = document.getElementById('message').value;
-    // Use as variáveis passadas pelo HTML
+    // Use as variáveis definidas no HTML
     socket.send({ message: message, username: username, color: color });
     document.getElementById('message').value = '';
 }

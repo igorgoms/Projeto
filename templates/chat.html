@@ -16,11 +16,12 @@
         </div>
     </div>
 
+    <!-- Passar valores da sessão para JavaScript -->
     <script>
-        // Defina as variáveis de sessão como variáveis JavaScript
         const username = "{{ session['username'] }}";
         const color = "{{ session['color'] }}";
     </script>
+
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
