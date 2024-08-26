@@ -1,9 +1,9 @@
-from flask import Flask, render_template, session, request, redirect, url_for
-from flask_sock import Sock
+from flask import Flask, render_template, request, redirect, url_for, session
+from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
-sock = Sock(app)
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 # Armazenar informações do servidor
 servers = {}
@@ -26,6 +26,7 @@ def login():
     if request.method == 'POST':
         admin_name = request.form.get('admin_name')
         admin_password = request.form.get('admin_password')
+        # Adicionar lógica de autenticação do administrador
         return redirect(url_for('index'))
     return render_template('login.html')
 
@@ -34,9 +35,12 @@ def configure():
     if request.method == 'POST':
         server_name = request.form.get('server_name')
         password = request.form.get('password')
+        username = request.form.get('username')
+        color = request.form.get('color')
+        
         if servers.get(server_name) == password:
-            session['username'] = request.form.get('username')
-            session['color'] = request.form.get('color')
+            session['username'] = username  # Armazenar o nome de usuário
+            session['color'] = color        # Armazenar a cor do usuário
             return redirect(url_for('chat'))
         else:
             return "Invalid credentials", 403
@@ -46,15 +50,10 @@ def configure():
 def chat():
     return render_template('chat.html')
 
-# WebSocket route
-@sock.route('/ws')
-def websocket(ws):
-    while True:
-        data = ws.receive()
-        if data:
-            ws.send(data)
+@socketio.on('message')
+def handle_message(message):
+    #print(f"Received message data: {message}")  # Adicione isso para depuração
+    emit('response', message, broadcast=True)
 
-#if __name__ == '__main__':
-#    app.run(debug=True)
 if __name__ == '__main__':
-    app.run(ssl_context='adhoc')
+    socketio.run(app, host='0.0.0.0', port=5000, debug=True)
