@@ -1,4 +1,4 @@
-const socket = io("https://projeto-lylkzwhat-igorgoms-projects.vercel.app");
+const socket = io("https://projeto-three-green.vercel.app/");
 
 socket.on('connect', () => {
     console.log('Connected to WebSocket server');

@@ -5,7 +5,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
 
 # Configurar o SocketIO para suportar HTTPS
-socketio = SocketIO(app, cors_allowed_origins=["https://projeto-lylkzwhat-igorgoms-projects.vercel.app"])
+socketio = SocketIO(app, cors_allowed_origins=["https://projeto-three-green.vercel.app/"])
 
 servers = {}
 
@@ -51,6 +51,13 @@ def chat():
 @socketio.on('message')
 def handle_message(message):
     emit('response', message, broadcast=True)
+
+@app.before_request
+def before_request():
+    if not request.is_secure:
+        url = request.url.replace("http://", "https://", 1)
+        return redirect(url)
+
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)
