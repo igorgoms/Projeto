@@ -22,3 +22,11 @@ function sendMessage() {
     socket.send({ message: message, username: username, color: color });
     document.getElementById('message').value = '';
 }
+
+// Adiciona o evento para enviar a mensagem ao pressionar "Enter"
+document.getElementById('message').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault(); // Evita que a tecla "Enter" insira uma nova linha no input
+        sendMessage(); // Envia a mensagem
+    }
+});
