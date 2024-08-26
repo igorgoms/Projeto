@@ -2,12 +2,12 @@
 const socket = io("https://" + window.location.hostname + ":" + window.location.port);
 
 // Função para adicionar uma mensagem ao chat
-socket.on('response', function (data) {
-    console.log("Received message data:", data); // Debug para verificar os dados recebidos
+socket.on('response', function (message) {
+    console.log("Received message data:", message); // Debug para verificar os dados recebidos
 
     const messageElement = document.createElement('div');
     messageElement.className = 'message';
-    messageElement.innerHTML = `<span class="username" style="color:${data.color};">${data.username}:</span><span class="text">${data.message}</span>`;
+    messageElement.innerHTML = `<span class="username" style="color:${message.color};">${message.username}:</span><span class="text">${message.message}</span>`;
     document.getElementById('messages').appendChild(messageElement);
 });
 

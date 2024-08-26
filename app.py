@@ -51,9 +51,9 @@ def chat():
     return render_template('chat.html')
 
 @socketio.on('message')
-def handle_message(data):
-    print(f"Received message data: {data}")  # Adicione isso para depuração
-    emit('response', data, broadcast=True)
+def handle_message(message):
+    #print(f"Received message data: {message}")  # Adicione isso para depuração
+    emit('response', message, broadcast=True)
 
 if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0', port=5000, debug=True)
