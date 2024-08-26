@@ -1,5 +1,6 @@
 // As variáveis `username` e `color` devem ser definidas no script inline no HTML
-const socket = io('http://localhost:5000');
+//const socket = io('http://localhost:5000');
+const socket = io('https://web-production-50a54.up.railway.app/');
 
 socket.on('connect', () => {
     console.log('Connected to WebSocket server');

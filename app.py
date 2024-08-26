@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, send_from_directory
 from flask_socketio import SocketIO, emit
 import os
 
@@ -51,6 +51,11 @@ def chat():
 def handle_message(message):
     emit('response', message, broadcast=True)
 
+# Rota para servir arquivos estáticos
+@app.route('/static/<path:path>')
+def send_static(path):
+    return send_from_directory('static', path)
+
 if __name__ == '__main__':
     # Executar o servidor Flask localmente com suporte a WebSocket
-    socketio.run(app, host='127.0.0.1', port=5000, debug=True)
+    socketio.run(app, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
