@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+import os
+from flask import Flask, render_template, session, redirect, url_for, request
 from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
@@ -56,4 +57,5 @@ def handle_message(message):
     emit('response', message, broadcast=True)
 
 if __name__ == '__main__':
-    socketio.run(app, host='0.0.0.0', port=5000, debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    socketio.run(app, host='0.0.0.0', port=port, debug=True)
