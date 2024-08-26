@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'default_secret_key')
-socketio = SocketIO(app, cors_allowed_origins="*")  # Permitir todas as origens para Socket.IO
+socketio = SocketIO(app, cors_allowed_origins="https://projeto-pkjy.onrender.com/")  # Permitir todas as origens para Socket.IO
 
 servers = {}
 
