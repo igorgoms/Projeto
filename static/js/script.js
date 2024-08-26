@@ -1,7 +1,8 @@
-// Conectar ao servidor Socket.IO usando HTTPS
-const socket = io();  // socket.io detectará o protocolo automaticamente
+const socket = io("https://projeto-lylkzwhat-igorgoms-projects.vercel.app");
 
-
+socket.on('connect', () => {
+    console.log('Connected to WebSocket server');
+});
 
 // Função para adicionar uma mensagem ao chat
 socket.on('response', function (message) {
