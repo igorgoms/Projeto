@@ -96,12 +96,3 @@ a:active {
     overflow-wrap: break-word; /* Quebra automática de palavras longas */
     word-wrap: break-word; /* Para navegadores mais antigos */
 }
-
-/* Estilo para cada mensagem */
-.message {
-    padding: 10px;
-    margin-bottom: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-}
