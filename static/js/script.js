@@ -1,4 +1,4 @@
-const socket = io("https://projeto-three-green.vercel.app/");
+const socket = io("http://localhost:5000"); // URL para o servidor local
 
 socket.on('connect', () => {
     console.log('Connected to WebSocket server');
@@ -17,8 +17,7 @@ socket.on('response', function (message) {
 // Função para enviar uma mensagem
 function sendMessage() {
     const message = document.getElementById('message').value;
-    const username = "{{ session['username'] }}"; // Usar o nome de usuário da sessão
-    const color = "{{ session['color'] }}"; // Usar a cor da sessão
+    // Use as variáveis definidas no HTML
     socket.send({ message: message, username: username, color: color });
     document.getElementById('message').value = '';
 }

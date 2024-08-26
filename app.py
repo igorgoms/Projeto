@@ -1,11 +1,12 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_socketio import SocketIO, emit
+import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
 
-# Configurar o SocketIO para suportar HTTPS
-socketio = SocketIO(app, cors_allowed_origins=["https://projeto-three-green.vercel.app/"])
+# Configurar o SocketIO para aceitar conexões locais
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 servers = {}
 
@@ -52,12 +53,5 @@ def chat():
 def handle_message(message):
     emit('response', message, broadcast=True)
 
-@app.before_request
-def before_request():
-    if not request.is_secure:
-        url = request.url.replace("http://", "https://", 1)
-        return redirect(url)
-
-
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
