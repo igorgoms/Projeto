@@ -56,6 +56,6 @@ def handle_message(message):
 def send_static(path):
     return send_from_directory('static', path)
 
-if __name__ == '__main__':
+#if __name__ == '__main__':
     # Executar o servidor Flask localmente com suporte a WebSocket
-    socketio.run(app, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
+#    socketio.run(app, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
