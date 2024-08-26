@@ -1,4 +1,4 @@
-const socket = io('https://web-production-865c.up.railway.app');  // Atualize a URL para o seu URL de produção
+const socket = io('https://web-production-865c.up.railway.app/');  // Atualize a URL para o seu URL de produção
 
 socket.on('connect', () => {
     console.log('Connected to WebSocket server');

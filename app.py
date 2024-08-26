@@ -61,6 +61,15 @@ def handle_message(message):
 def send_static(path):
     return send_from_directory('static', path)
 
+@socketio.on('connect')
+def on_connect():
+    print('Client connected')
+
+@socketio.on('disconnect')
+def on_disconnect():
+    print('Client disconnected')
+
+
 if __name__ == '__main__':
     # Remover ou comentar a linha abaixo para implantar no Railway
     # socketio.run(app, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
