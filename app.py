@@ -1,12 +1,14 @@
-import os
-from flask import Flask, render_template, session, redirect, url_for, request
+from flask import Flask, render_template, request, redirect, url_for, session
 from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
-socketio = SocketIO(app, cors_allowed_origins="*")
+socketio = SocketIO(app, cors_allowed_origins="*")  # Certifique-se de que cors_allowed_origins está correto
 
-# Armazenar informações do servidor
+# Configure SocketIO with CORS allowed origins
+socketio = SocketIO(app, cors_allowed_origins=["https://projeto-qmoetrk2h-igorgoms-projects.vercel.app"])
+
+# Definir a variável servers
 servers = {}
 
 @app.route('/')
@@ -27,7 +29,6 @@ def login():
     if request.method == 'POST':
         admin_name = request.form.get('admin_name')
         admin_password = request.form.get('admin_password')
-        # Adicionar lógica de autenticação do administrador
         return redirect(url_for('index'))
     return render_template('login.html')
 
@@ -36,12 +37,9 @@ def configure():
     if request.method == 'POST':
         server_name = request.form.get('server_name')
         password = request.form.get('password')
-        username = request.form.get('username')
-        color = request.form.get('color')
-        
         if servers.get(server_name) == password:
-            session['username'] = username  # Armazenar o nome de usuário
-            session['color'] = color        # Armazenar a cor do usuário
+            session['username'] = request.form.get('username')
+            session['color'] = request.form.get('color')
             return redirect(url_for('chat'))
         else:
             return "Invalid credentials", 403
@@ -53,9 +51,7 @@ def chat():
 
 @socketio.on('message')
 def handle_message(message):
-    #print(f"Received message data: {message}")  # Adicione isso para depuração
     emit('response', message, broadcast=True)
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
-    socketio.run(app, host='0.0.0.0', port=port, debug=True)
+    socketio.run(app, debug=True)

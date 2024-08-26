@@ -1,5 +1,6 @@
 // Conectar ao servidor Socket.IO usando HTTPS
-const socket = io("https://" + window.location.hostname + ":" + window.location.port);
+const socket = io.connect("wss://" + window.location.host);  // Use wss:// para conexões seguras
+
 
 // Função para adicionar uma mensagem ao chat
 socket.on('response', function (message) {
