@@ -3,10 +3,8 @@ from flask_socketio import SocketIO, emit
 import os
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your_secret_key'
-
-# Configurar o SocketIO para aceitar conexões locais
-socketio = SocketIO(app, cors_allowed_origins="*")
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'default_secret_key')
+socketio = SocketIO(app, cors_allowed_origins="*")  # Permitir todas as origens para Socket.IO
 
 servers = {}
 
@@ -54,5 +52,6 @@ def handle_message(message):
     emit('response', message, broadcast=True)
 
 if __name__ == '__main__':
-    #socketio.run(app, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+    # Remover o código abaixo se estiver usando o Gunicorn
+    # socketio.run(app, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
     pass

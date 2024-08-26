@@ -1,4 +1,4 @@
-const socket = io("http://localhost:5000"); // URL para o servidor local
+const socket = io("https://projeto-pkjy.onrender.com/"); // URL para o servidor local
 
 socket.on('connect', () => {
     console.log('Connected to WebSocket server');
