@@ -7,11 +7,10 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
 
 # Configurar CORS para Flask
-CORS(app, resources={r"*": {"origins": "*"}})
+CORS(app, resources={r"*": {"origins": "https://projeto-three-green.vercel.app"}})
 
 # Configurar SocketIO para permitir CORS
 socketio = SocketIO(app, cors_allowed_origins="https://projeto-three-green.vercel.app")
-
 
 servers = {}
 
@@ -69,7 +68,6 @@ def on_connect():
 @socketio.on('disconnect')
 def on_disconnect():
     print('Client disconnected')
-
 
 if __name__ == '__main__':
     # Remover ou comentar a linha abaixo para implantar no Railway
