@@ -10,7 +10,8 @@ app.config['SECRET_KEY'] = 'your_secret_key'
 CORS(app, resources={r"*": {"origins": "*"}})
 
 # Configurar SocketIO para permitir CORS
-socketio = SocketIO(app, cors_allowed_origins="*")
+socketio = SocketIO(app, cors_allowed_origins="https://projeto-three-green.vercel.app")
+
 
 servers = {}
 
