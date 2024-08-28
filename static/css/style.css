@@ -18,11 +18,24 @@ h1 {
 a {
     color: #6699ff;
     text-decoration: none;
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid #6699ff;
+    border-radius: 5px;
     margin: 10px;
+    text-align: center;
 }
 
 a:hover {
     text-decoration: underline;
+    background-color: #333333;
+}
+
+/* Centralizar links */
+.links-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 /* Formulários e campos de input */
